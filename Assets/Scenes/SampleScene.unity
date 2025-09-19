@@ -1343,6 +1343,7 @@ GameObject:
   - component: {fileID: 1259210252}
   - component: {fileID: 1259210251}
   - component: {fileID: 1259210255}
+  - component: {fileID: 1259210256}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1362,7 +1363,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9cefc52e4949742af1e1df00e1c666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 5
+  animator: {fileID: 1259210256}
 --- !u!50 &1259210252
 Rigidbody2D:
   serializedVersion: 5
@@ -1434,7 +1436,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -489829536009929732, guid: cd2807337680fea4b951ede762a3e370, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1494,18 +1496,40 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0144075155, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.59375, y: 1.125}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.60620046, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &1259210256
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259210250}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0aa688239870cc1419ec86c89ab76294, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1265587565
 GameObject:
   m_ObjectHideFlags: 0
@@ -3704,7 +3728,7 @@ GameObject:
   - component: {fileID: 1304104742}
   - component: {fileID: 1304104741}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: WallGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3749,7 +3773,7 @@ GameObject:
   - component: {fileID: 1823820797}
   - component: {fileID: 1823820796}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: FloorGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
