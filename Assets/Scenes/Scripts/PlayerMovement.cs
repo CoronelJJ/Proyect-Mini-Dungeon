@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("movementX", movVector.x);
         animator.SetFloat("movementY", movVector.y);
 
-        Debug.Log(movVector);
 
         rb.linearVelocity = movVector * movementSpeed;
 
