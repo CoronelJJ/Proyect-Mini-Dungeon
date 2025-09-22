@@ -4,8 +4,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float movementSpeed = 5.0f;
+    [SerializeField] float movementSpeed = 5.0f;
+    [SerializeField] float stopTimer = 0.2f;
+    bool stopMovement = false;
     private Rigidbody2D rb;
+    public Vector2 movementVector;
+    
 
     [SerializeField] Animator animator;
     void Start()
@@ -19,13 +23,19 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        Vector2 movVector = setMoveVector(horizontalInput, verticalInput);
+        movementVector = setMoveVector(horizontalInput, verticalInput);
 
-        animator.SetFloat("movementX", movVector.x);
-        animator.SetFloat("movementY", movVector.y);
+        animator.SetFloat("movementX", movementVector.x);
+        animator.SetFloat("movementY", movementVector.y);
 
+        if (Input.GetKey(KeyCode.Space))
+        {
+            stopMovement = true;
+        }
 
-        rb.linearVelocity = movVector * movementSpeed;
+        
+
+        rb.linearVelocity = movementVector * movementSpeed;
 
     }
 
