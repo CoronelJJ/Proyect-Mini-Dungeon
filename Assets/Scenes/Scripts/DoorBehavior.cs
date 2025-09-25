@@ -16,7 +16,15 @@ public class DoorBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            openTheDoor();
+            PlayerStats player = other.GetComponent<PlayerStats>();
+
+            if (player != null)
+            {
+                if (player.consumeKey())
+                {
+                    openTheDoor();
+                }
+            }
         }
 
     }
