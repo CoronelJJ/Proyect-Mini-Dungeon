@@ -8,6 +8,12 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] Vector3 offset;
 
 
+    void Start()
+    {
+        Vector3 finalPosition = target.position + offset;
+
+        transform.position = finalPosition;
+    }
     void LateUpdate()
     {
         Vector3 finalPosition = target.position + offset;

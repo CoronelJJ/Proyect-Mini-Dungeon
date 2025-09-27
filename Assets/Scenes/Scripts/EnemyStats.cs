@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyStats : MonoBehaviour
 {
     [SerializeField] int hp = 50;
+    [SerializeField] GameObject drops;
     float iframe;
 
     void Start()
@@ -37,6 +38,7 @@ public class EnemyStats : MonoBehaviour
 
         if (hp <= 0)
         {
+            Instantiate(drops, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
