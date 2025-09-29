@@ -12,6 +12,8 @@ public class PlayerAttack : MonoBehaviour
 
     SpriteRenderer attackSprite;
 
+    [SerializeField] Animator animator;
+
 
 
     void Start()
@@ -28,17 +30,19 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
 
-        Vector2 direction = movement.movementVector;
-        if (direction == Vector2.zero)
+        Vector2 direction = movement.lastDirection;
+        if (direction != Vector2.zero)
         {
-            return;
+
+            attackZone.localPosition = direction * attackRange;
+            
         }
-        attackZone.localPosition = direction * attackRange;
 
         if (Input.GetKey(KeyCode.Space))
         {
             attackTimer = attackDuration;
             attackCollider.enabled = true;
+            animator.SetBool("isAttacking", true);
             
         }
 
@@ -49,6 +53,7 @@ public class PlayerAttack : MonoBehaviour
         else
         {
             attackCollider.enabled = false;
+            animator.SetBool("isAttacking", false);
           
         }
 
@@ -63,7 +68,7 @@ public class PlayerAttack : MonoBehaviour
             if (enemy != null)
             {
 
-            enemy.getHit();
+            enemy.GetHit();
             Debug.Log("enemy hit");
             }
         }

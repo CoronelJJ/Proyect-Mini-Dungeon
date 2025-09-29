@@ -5,10 +5,13 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [SerializeField] float movementSpeed = 5.0f;
-    [SerializeField] float stopTimer = 0.2f;
+    [SerializeField] float maxSpeed = 5.0f;
+    [SerializeField] float attackDuration = 0.2f;
+    [SerializeField] float attackTimer;
     bool stopMovement = false;
-    private Rigidbody2D rb;
-    public Vector2 movementVector;
+    Rigidbody2D rb;
+    Vector2 movementVector;
+    public Vector2 lastDirection;
     
 
     [SerializeField] Animator animator;
@@ -20,22 +23,52 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        
+    float horizontalInput = Input.GetAxis("Horizontal");
+    float verticalInput = Input.GetAxis("Vertical");
 
-        movementVector = setMoveVector(horizontalInput, verticalInput);
+    Vector2 inputVector = setMoveVector(horizontalInput, verticalInput);
 
-        animator.SetFloat("movementX", movementVector.x);
-        animator.SetFloat("movementY", movementVector.y);
 
-        if (Input.GetKey(KeyCode.Space))
+        if (!stopMovement)
         {
-            stopMovement = true;
-        }
+            movementVector = inputVector;
+
+            if (inputVector.x != 0 || inputVector.y != 0)
+            {
+
+                lastDirection = inputVector;
+            }
+            else if (inputVector == Vector2.zero)
+            {
+                lastDirection = inputVector;
+            }
+    }
 
         
+    animator.SetFloat("movementX", lastDirection.x);
+    animator.SetFloat("movementY", lastDirection.y);
 
+    
+    if (Input.GetKeyDown(KeyCode.Space) && !stopMovement)
+    {
+        stopMovement = true;
+        attackTimer = attackDuration;
+    }
+
+    
+    if (stopMovement)
+    {
+        rb.linearVelocity = Vector2.zero;
+        attackTimer -= Time.deltaTime;
+
+        if (attackTimer <= 0f)
+            stopMovement = false;
+    }
+    else
+    {
         rb.linearVelocity = movementVector * movementSpeed;
+    }
 
     }
 

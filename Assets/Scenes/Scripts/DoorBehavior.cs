@@ -20,7 +20,7 @@ public class DoorBehavior : MonoBehaviour
 
             if (player != null)
             {
-                if (player.consumeKey())
+                if (player.ConsumeKey())
                 {
                     openTheDoor();
                 }

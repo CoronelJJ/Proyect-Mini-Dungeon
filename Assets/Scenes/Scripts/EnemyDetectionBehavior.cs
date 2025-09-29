@@ -10,6 +10,7 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] Transform _parent;
 
     [SerializeField] Rigidbody2D _rb;
+    [SerializeField] EnemyAttack _enemyAttack;
     Vector3 _direction3;
     Quaternion _rotation;
 
@@ -21,6 +22,8 @@ public class EnemyBehavior : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.transform.GetPositionAndRotation(out _direction3, out _rotation);
+            _enemyAttack.playerPos = collision.transform.position;
+            _enemyAttack.Attack();
 
             float distanceToPlayer = Vector2.Distance(transform.position, _direction3);
             if (distanceToPlayer > _attackRadius)
@@ -33,7 +36,7 @@ public class EnemyBehavior : MonoBehaviour
                 _movement = Vector2.zero;
             }
 
-            Debug.Log(_movement);
+            
             if (_movement.x < 0 && _parent.localScale.x > 0)
             {
                 _parent.localScale = new Vector3(_parent.localScale.x * -1, _parent.localScale.y);
@@ -52,6 +55,7 @@ public class EnemyBehavior : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             _rb.linearVelocity = Vector2.zero;
+            _enemyAttack.playerPos = Vector3.zero;
         }
     }
 }

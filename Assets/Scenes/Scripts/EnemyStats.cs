@@ -4,12 +4,11 @@ public class EnemyStats : MonoBehaviour
 {
     [SerializeField] int hp = 50;
     [SerializeField] GameObject drops;
+
+    [SerializeField] SpriteRenderer sprite;
     float iframe;
+    float changeColorTimer;
 
-    void Start()
-    {
-
-    }
 
     void Update()
     {
@@ -18,28 +17,53 @@ public class EnemyStats : MonoBehaviour
         {
             iframe -= Time.deltaTime;
         }
-    }
 
-    public void getHit()
-    {
-        if (iframe <= 0)
+        if (changeColorTimer > 0)
         {
-            receiveDamage();
-            iframe = 0.5f;
-            
+            changeColorTimer -= Time.deltaTime;
+            if (changeColorTimer <= 0)
+            {
+                sprite.color = Color.white;
+            }
         }
 
     }
-    void receiveDamage()
+
+    public void GetHit()
     {
-       
+        if (iframe <= 0)
+        {
+            ReceiveDamage();
+            iframe = 1f;
+
+        }
+
+    }
+    void ReceiveDamage()
+    {
+        HitColorChange();
         hp -= 20;
         Debug.Log(hp);
 
+
         if (hp <= 0)
         {
-            Instantiate(drops, transform.position, Quaternion.identity);
+            
             Destroy(gameObject);
+        }
+    }
+
+    void HitColorChange()
+    {
+        sprite.color = Color.red;
+        changeColorTimer = 0.2f;
+    }
+
+    void OnDestroy()
+    {
+        RoomManager rm = GetComponentInParent<RoomManager>();
+        if (rm != null){
+            rm.EnemyDied();
         }
     }
 }
