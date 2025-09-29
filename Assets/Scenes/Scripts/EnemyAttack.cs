@@ -9,7 +9,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] float attackDuration = 0.2f;
     [SerializeField] float attackCooldown = 1f;
 
-    [HideInInspector] public Vector3 playerPos;
+    public Vector3 playerPos;
 
     private bool isAttacking = false;
     private float attackTimer = 0f;
@@ -40,10 +40,10 @@ public class EnemyAttack : MonoBehaviour
                 EndAttack();
             }
 
-            return; 
+            return;
         }
 
-        
+
         if (playerPos != Vector3.zero)
         {
             Vector3 direction = (playerPos - transform.position).normalized;
@@ -72,7 +72,7 @@ public class EnemyAttack : MonoBehaviour
 
     }
 
-    
+
     void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !alreadyHit.Contains(other.gameObject))

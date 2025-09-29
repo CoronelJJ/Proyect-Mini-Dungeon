@@ -1,5 +1,6 @@
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -83,6 +84,6 @@ public class PlayerStats : MonoBehaviour
 
     void KillPlayer()
     {
-        return;
+        SceneManager.LoadScene(3);
     }
 }
